@@ -4,7 +4,7 @@
 
 const char* ssid     = "YOUR_SSID";
 const char* password = "YOUR_KEY";
-/*
+/ // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #define DHTTYPE DHT11
 #define DHTPIN  2
