@@ -40,14 +40,20 @@ unsigned long previousMillis = 0;
 const unsigned long interval = 1000;
 
 void loop(void) {
+  delay(1);
+
+  unsigned long currentMillis = millis();
+
+  if (currentMillis >= 10 * 60 * 1000) {
+    ESP.restart();
+  }
+
   WiFiClient c = server.available();
   if (!c) return;
 
   while (!c.available()) delay(1);
   c.flush();
 
-  unsigned long currentMillis = millis();
-  
   if (currentMillis - previousMillis < interval) {
     c.println("HTTP/1.1 429 Too Many Requests");
     c.println("Content-Type: plain/text");
@@ -70,7 +76,5 @@ void loop(void) {
   if (!isnan(t)) {
     c.printf("room_temperature_celsius %f\n", t);
   }
-  
-  delay(1);
 }
 
